@@ -1,0 +1,64 @@
+﻿@page "/"
+@using app.Components
+@using app.Components.Modals
+@using app.Models
+@using app.Pages
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@inherits IndexBase
+
+<CascadingValue Value="@State">
+    <div class="d-flex">
+        <div class="p-0 chessboard">
+            @for (var y = 1; y < 9; y++)
+            {
+                <div class="d-flex flex-row">
+                    @for (var x = 1; x < 9; x++)
+                    {
+                        var p = new Position(x, y);
+                        <BoardCell Position="@p"
+                           UpdateBoardCallback="async info => await UpdateStatuses(info)"
+                           IsWhite="@_white" />
+                        Switch();
+                    }
+                    @{
+                        Switch();
+                    }
+                </div>
+            }
+        </div>
+        <div class="sidepanel d-flex p-2 flex-column">
+            <div class="flex-column align-items-start">
+                AI: @aiOn <button class="btn btn-primary" @onclick="ToggleAi">Turn @(aiOn ? "off" : "on")</button>
+            </div>
+            <div>
+                <app.Components.CapturesRazorComponent Caps="@blackCaptures" />
+            </div>
+            <div class="align-items-end mt-auto">
+                <app.Components.CapturesRazorComponent Caps="@whiteCaptures" />
+            </div>
+        </div>
+
+        @* <div id="stat" class="ml-2">
+        @*     <History @bind-ResetHistory="@resetHistory"/> *@
+        @* </div> *@
+    </div>
+
+    <audio id="sound" style="display:none">
+        <source src="assets/move.wav">
+    </audio>
+    @if (gameOver)
+    {
+        <Modal OnBack=@GameOver>
+            <Info Winner="@winner" />
+        </Modal>
+    }
+    @if (promotionModal)
+    {
+        <Modal>
+            <Promotion PieceInfo="@promotionPosition"
+                   OnDone="(new Action<PieceInfo>(async info => await PromotionDone(info)))"
+                   Back="() => promotionModal = false" />
+        </Modal>
+    }
+</CascadingValue>

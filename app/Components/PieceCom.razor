@@ -1,0 +1,11 @@
+﻿@inherits PieceComBase
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<div 
+     draggable="@myTurn"
+     @ondragstart="async e => await DragStart()"
+     ondragleave="if (!@myTurn) event.preventDefault();"
+     class="m-0 p-0 piece @pieceValue"
+     style="left: @(x)px; top: @(y)px;">
+</div>

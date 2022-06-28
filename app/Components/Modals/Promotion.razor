@@ -1,0 +1,24 @@
+﻿
+@inherits PromotionBase
+@using app.Services
+@using Microsoft.AspNetCore.Components.Web
+@using app.Components.Modals
+
+<div class="modal-header">Promote pawn to</div>
+<div class="modal-body d-flex">
+    
+    <div class="d-flex flex-row">
+        @foreach (var choice in choices)
+        {
+            <div class="piece @choice.ToChar()"
+                 @onclick="@(async () => await Select(choice.ToChar()))"></div>
+        }
+        @* <div class="piece Q"></div> *@
+        @* <div class="piece R"></div> *@
+        @* <div class="piece B"></div> *@
+        @* <div class="piece N"></div> *@
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" @onclick="@Back">Back</button>
+</div>

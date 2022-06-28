@@ -1,0 +1,52 @@
+BUGS:
+    - no scores on the LogThinking, only totals
+    FIXED- checked cell remains in color after AI moves
+    FIXED- Checking visual happens when same piece color is hit
+    - clicking info modal is the same as back
+    - Minimize damage AI is dumb. How can a -9 move be the best. Look at the query
+    - Promotion bug when no captures can be promoted
+    - Castling is not complete, check wiki, read requirements
+        the line of sight is not working. White king right side jumping over bishop
+
+TODO:
+    DONE- Reset captures when new game
+    - Do the totalscore
+    - Do some unittests on the FEN string of BoardState
+	- Feels like there is another way to count score
+	    current way: we make a move, and then take the counter move score for any piece and add to that move
+	    this will end with a net score for the initial move
+
+IMPROVEMENTS:
+    INFRASTRUCTURE
+    PRACTISES
+        - Promoting is not limited to earlier captures (can't add king or another pawn)
+    GAMEPLAY
+        - castling
+            The king is not being checked for previous movement
+            - check also that the rook new pos is free
+        - special moves
+            pawn: https://en.wikipedia.org/wiki/Pawn_(chess)#:~:text=Normally%20a%20pawn%20moves%20by,or%20foe%2C%20blocks%20its%20advance.
+                    - en passant
+        
+	VISUALS
+	    - Make it fit (css)
+	        laptops
+	        tablets
+	        phones
+	    - fade old captures slightly
+	    - As we are counting scores with the AI, lets add a winning meter to the right also telling the worth
+	        of the captures (delta)
+	    - We need some captured pieces to the right, so that we can see if something was captured
+	    - show border around last position moved to
+		- add arrow/line showing move from and to
+		
+	AI
+	    - Even though chess gives good points, we should also check moves
+	    - What is the AI thinking here? [k/p1Rp3Q/B3NK/8/8/8/2P/8 b]
+	    - Check defensive moves, right now I think we only check captures, but we should also count
+	        scores as negative if we don't move a piece
+	        Some moves are randomized when no good captures, but there should be scores on 1 depth also
+	        so that we can see the losing point.
+		- When more pieces than opponent, try to move pieces closer to king (without being captured)
+		- Go for promotions
+		    check capture piece and add that as a move with points

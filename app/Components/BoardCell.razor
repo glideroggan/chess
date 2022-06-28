@@ -1,0 +1,16 @@
+﻿@inherits BoardCellBase
+@using Microsoft.AspNetCore.Components.Web
+@using app.Components
+
+<div class="p-0 spot @(IsWhite ? "white" : "black") @(Tinted ? "tint" : "") @(MovedTo ? "dotted" : "") @_checked"
+     ondragover="event.preventDefault();"
+     @ondrop="@(async e => await Drop(e))"
+     @ondrop:preventDefault="true"
+     @ondrop:stopPropagation="true">
+     
+    @if (_piece != null)
+    {
+        <PieceCom Val="@_piece.Value" OnMove="@(async () => await OnMove())" />
+    }
+    
+</div>

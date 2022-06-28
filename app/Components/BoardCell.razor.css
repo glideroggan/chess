@@ -1,0 +1,46 @@
+﻿@media only screen and (min-width: 900px) {
+    .spot {
+        overflow: hidden;
+        width:100%;
+        min-width: 150px;
+        height: calc((100vh - 60px) / 8);
+        min-height: 150px;
+        border: 1px black solid;
+    }
+}
+@media all and (max-width: 901px) {
+    .spot {
+        overflow: hidden;
+        width: calc((100vh - 60px) / 8);
+        /* min-width: 150px; */
+        height: calc((100vh - 60px) / 8);
+        max-height: 100px;
+        /* min-height: 150px; */
+        border: 1px black solid;
+    }
+}
+
+
+
+
+
+.dotted {
+    border: 1px red solid;
+}
+
+.white {
+    background-color: rgba(238, 216, 192, 1);
+}
+
+.black {
+    background-color: #AB7A65;
+}
+
+.tint {
+    background-color: rgba(100%, 50%, 0%, .4);
+}
+.checked {
+    background-color: rgba(100%, 0%, 0%, .7);
+}
+
+

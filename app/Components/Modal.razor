@@ -1,0 +1,16 @@
+﻿@inherits ModalBase
+@namespace app.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<div id="modal-container" @onclick="OnBack" role="dialog">
+    <div class="modal-dialog-centered">
+
+        <div class="col-8 m-auto modal-content">
+            <CascadingValue Value="this">
+                @ChildContent
+            </CascadingValue>
+        </div>
+    </div>
+</div>
+
+
